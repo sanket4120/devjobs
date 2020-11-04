@@ -1,0 +1,21 @@
+.loader {
+  border-radius: 50%;
+  width: 5rem;
+  height: 5rem;
+  border-top: 2px rgb(90, 90, 211) solid;
+  border-left: 2px rgb(90, 90, 211) solid;
+  border-right: 2px transparent solid;
+  animation: loading 0.8s linear infinite;
+  text-align: center;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  margin-left: -5rem;
+  margin-top: -5rem;
+}
+
+@keyframes loading {
+  to {
+    transform: rotate(360deg);
+  }
+}

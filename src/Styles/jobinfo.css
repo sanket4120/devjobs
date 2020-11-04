@@ -1,0 +1,97 @@
+.jobinfo {
+  width: 65%;
+  margin: 0 auto;
+  position: relative;
+  padding: 1rem 0 2rem 0;
+}
+
+.jobinfo a {
+  color: rgb(90, 90, 211);
+  cursor: pointer;
+}
+.apply-btn {
+  background-color: #f1f6f9;
+  padding: 1rem 1.5rem;
+  color: rgb(90, 90, 211);
+  border-radius: 5px;
+}
+
+.c_info {
+  background-color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 7px;
+}
+.c_info_left {
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.c_info_left img {
+  display: block;
+  width: 100%;
+  object-fit: contain;
+}
+.c_info_right {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  padding: 1rem;
+}
+.desc {
+  margin-top: 1rem;
+  background-color: #fff;
+  border-radius: 7px;
+  padding: 1rem;
+}
+.jinfo {
+  margin: 1.5rem 0;
+}
+.jinfo span {
+  color: #868685;
+}
+.jinfo #location {
+  color: rgb(90, 90, 211);
+}
+.jdesc p {
+  font-weight: lighter;
+}
+.jdesc p strong {
+  line-height: 2rem;
+  font-size: 1.3rem;
+  font-weight: normal;
+}
+.how_to_apply {
+  background-color: rgb(90, 90, 211);
+  margin: 1rem 0;
+  padding: 1.5rem 1rem;
+  color: #fff;
+  border-radius: 7px;
+}
+.how_to_apply a {
+  color: #fff;
+  text-decoration: underline;
+}
+#apply {
+  margin-bottom: 1rem;
+}
+.content-bg-dark {
+  background-color: #2e2d2d;
+  color: white;
+}
+
+@media (max-width: 830px) {
+  .jobinfo {
+    width: 90%;
+  }
+}
+
+@media (max-width: 650px) {
+  .c_info_left {
+    display: none;
+  }
+}
