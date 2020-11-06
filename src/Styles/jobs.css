@@ -1,9 +1,9 @@
 .jobs {
-  margin: 2.5rem auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-column-gap: 1.5rem;
   grid-row-gap: 3rem;
+  margin: 2.5rem auto;
 }
 
 @media (max-width: 920px) {
