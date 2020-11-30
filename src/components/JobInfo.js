@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { ThemeContext } from '../ThemeContextProvider';
 import '../Styles/jobinfo.css';
@@ -15,6 +15,10 @@ function JobInfo({
   how_to_apply,
 }) {
   const { isLightTheme } = useContext(ThemeContext);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className='jobinfo' style={{ wordBreak: 'break-word' }}>
