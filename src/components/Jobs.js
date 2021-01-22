@@ -43,7 +43,7 @@ function Jobs(desc) {
       </div>
       {!loading && !error && jobs && jobs.length === 0 && (
         <Message
-          message='Sorry, no jobs found'
+          message='Nothing found'
           image={require('../assets/search.svg')}
         />
       )}

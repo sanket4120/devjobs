@@ -2,19 +2,38 @@ import React, { useContext } from 'react';
 import { JobContext } from '../JobContextProvider';
 import { PageContext } from '../PageContextProvider';
 import '../Styles/pagination.css';
+import { SearchParamsContext } from '../SearchParamsContex';
 
 function Pagination() {
-  const { hasNextPage } = useContext(JobContext);
+  const { hasNextPage, fetchJobs } = useContext(JobContext);
   const { page, setPage } = useContext(PageContext);
+  const { searchParams } = useContext(SearchParamsContext);
+
+  function handleChange(value) {
+    setPage(page + value);
+  }
+
   return (
     <div className='pagination'>
       {page !== 1 && (
-        <button className='btn' onClick={() => setPage(page - 1)}>
+        <button
+          className='btn'
+          onClick={() => {
+            fetchJobs(searchParams, page - 1);
+            handleChange(-1);
+          }}
+        >
           Prev Page
         </button>
       )}
       {hasNextPage && (
-        <button className='btn' onClick={() => setPage(page + 1)}>
+        <button
+          className='btn'
+          onClick={() => {
+            fetchJobs(searchParams, page + 1);
+            handleChange(1);
+          }}
+        >
           Next Page
         </button>
       )}

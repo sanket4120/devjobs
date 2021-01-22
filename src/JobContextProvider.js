@@ -1,6 +1,6 @@
-import React, { createContext, useReducer } from 'react';
-import axios from 'axios';
+import React, { createContext, useEffect, useReducer } from 'react';
 import jobReducer from './reducer/jobReducer';
+import axios from 'axios';
 import {
   MAKE_REQUEST,
   GET_DATA,
@@ -12,10 +12,11 @@ export const JobContext = createContext();
 
 export default function JobContextProvider(props) {
   const [state, dispatch] = useReducer(jobReducer, { jobs: [], loading: true });
+
   const BASE_URL =
     'https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json';
 
-  function getJobs(params, page) {
+  const fetchJobs = (params, page) => {
     dispatch({ type: MAKE_REQUEST });
     axios
       .get(BASE_URL, {
@@ -47,10 +48,14 @@ export default function JobContextProvider(props) {
       .catch((e) => {
         dispatch({ type: ERROR, payload: { error: e } });
       });
-  }
+  };
+
+  useEffect(() => {
+    fetchJobs({}, 1);
+  }, []);
 
   return (
-    <JobContext.Provider value={{ ...state, getJobs }}>
+    <JobContext.Provider value={{ ...state, fetchJobs }}>
       {props.children}
     </JobContext.Provider>
   );

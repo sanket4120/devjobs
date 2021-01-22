@@ -1,40 +1,30 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { JobContext } from '../JobContextProvider';
 import { PageContext } from '../PageContextProvider';
 import '../Styles/searchbar.css';
+import { SearchParamsContext } from '../SearchParamsContex';
 import { ThemeContext } from '../ThemeContextProvider';
 
 function SearchBar() {
-  const { getJobs } = useContext(JobContext);
+  const { fetchJobs } = useContext(JobContext);
   const { page, setPage } = useContext(PageContext);
-  const [params, setParams] = useState({
-    description: '',
-    location: '',
-    full_time: false,
-  });
-
-  useEffect(() => {
-    getJobs(params, page);
-  }, [page]);
+  const { searchParams, setSearchParams } = useContext(SearchParamsContext);
+  const { description, location, full_time } = searchParams;
 
   function handleSubmit(e) {
     e.preventDefault();
     setPage(1);
-    getJobs(params, page);
+    fetchJobs(searchParams, page);
   }
 
   function handleFullTime() {
-    setParams((prevParams) => {
-      return { ...prevParams, full_time: !prevParams.full_time };
-    });
+    setSearchParams({ ...searchParams, full_time: !searchParams.full_time });
   }
 
   function handleParamsChange(e) {
     const param = e.target.name;
     const value = e.target.value;
-    setParams((prevParams) => {
-      return { ...prevParams, [param]: value };
-    });
+    setSearchParams({ ...searchParams, [param]: value });
   }
 
   const { isLightTheme } = useContext(ThemeContext);
@@ -49,7 +39,7 @@ function SearchBar() {
               type='text'
               placeholder='Filter by title..'
               onChange={handleParamsChange}
-              value={params.description}
+              value={description}
               name='description'
             />
           </div>
@@ -62,7 +52,7 @@ function SearchBar() {
               type='text'
               placeholder='Filter by location..'
               onChange={handleParamsChange}
-              value={params.location}
+              value={location}
               name='location'
             />
           </div>
@@ -71,7 +61,7 @@ function SearchBar() {
             <span>
               <input
                 type='checkbox'
-                checked={params.full_time}
+                checked={full_time}
                 onChange={handleFullTime}
                 name='full_time'
               />

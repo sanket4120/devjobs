@@ -4,6 +4,7 @@ import '../Styles/card.css';
 import { ThemeContext } from '../ThemeContextProvider';
 
 function Card({
+  id,
   type,
   created_at,
   company,
@@ -22,20 +23,7 @@ function Card({
     <Link
       style={{ wordBreak: 'break-word' }}
       className={isLightTheme ? 'card' : 'card content-bg-dark'}
-      to={{
-        pathname: '/jobinfo',
-        state: {
-          type,
-          created_at,
-          company,
-          location,
-          title,
-          logo,
-          company_url,
-          description,
-          how_to_apply,
-        },
-      }}
+      to={`/${id}`}
     >
       <img className='image' src={logo} alt='Logo' />
       <span>

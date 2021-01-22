@@ -8,6 +8,7 @@ import JobInfo from './components/JobInfo';
 import JobContextProvider from './JobContextProvider';
 import PageContextProvider from './PageContextProvider';
 import { ThemeContext } from './ThemeContextProvider';
+import SearchParamsProvider from './SearchParamsContex';
 
 export default function App() {
   const { isLightTheme } = useContext(ThemeContext);
@@ -17,15 +18,13 @@ export default function App() {
       <Router>
         <JobContextProvider>
           <PageContextProvider>
-            <Route exact path='/' component={SearchBar} />
-            <Route exact path='/' component={Jobs} />
+            <SearchParamsProvider>
+              <Route exact path='/' component={SearchBar} />
+              <Route exact path='/' component={Jobs} />
+            </SearchParamsProvider>
           </PageContextProvider>
         </JobContextProvider>
-        <Route
-          exact
-          path='/jobinfo'
-          render={(props) => <JobInfo {...props.history.location.state} />}
-        />
+        <Route exact path='/:id' component={JobInfo} />
       </Router>
     </div>
   );
