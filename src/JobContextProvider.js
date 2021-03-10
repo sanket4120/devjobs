@@ -17,6 +17,8 @@ export default function JobContextProvider(props) {
     'https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json';
 
   const fetchJobs = (params, page) => {
+    console.log(`got request page:${page}`);
+    console.log('parameters:', params);
     dispatch({ type: MAKE_REQUEST });
     axios
       .get(BASE_URL, {
@@ -26,7 +28,9 @@ export default function JobContextProvider(props) {
           ...params,
         },
       })
-      .then((res) => dispatch({ type: GET_DATA, payload: { jobs: res.data } }))
+      .then((res) => {
+        dispatch({ type: GET_DATA, payload: { jobs: res.data } });
+      })
       .catch((e) => {
         dispatch({ type: ERROR, payload: { error: e } });
       });
@@ -51,7 +55,14 @@ export default function JobContextProvider(props) {
   };
 
   useEffect(() => {
-    fetchJobs({}, 1);
+    fetchJobs(
+      {
+        description: '',
+        location: '',
+        full_time: false,
+      },
+      1
+    );
   }, []);
 
   return (

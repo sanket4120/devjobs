@@ -7,7 +7,7 @@ import { SearchParamsContext } from '../SearchParamsContex';
 function Pagination() {
   const { hasNextPage, fetchJobs } = useContext(JobContext);
   const { page, setPage } = useContext(PageContext);
-  const { searchParams } = useContext(SearchParamsContext);
+  const { savedParams } = useContext(SearchParamsContext);
 
   function handleChange(value) {
     setPage(page + value);
@@ -19,7 +19,7 @@ function Pagination() {
         <button
           className='btn'
           onClick={() => {
-            fetchJobs(searchParams, page - 1);
+            fetchJobs(savedParams, page - 1);
             handleChange(-1);
           }}
         >
@@ -30,7 +30,7 @@ function Pagination() {
         <button
           className='btn'
           onClick={() => {
-            fetchJobs(searchParams, page + 1);
+            fetchJobs(savedParams, page + 1);
             handleChange(1);
           }}
         >

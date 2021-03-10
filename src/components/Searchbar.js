@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { JobContext } from '../JobContextProvider';
 import { PageContext } from '../PageContextProvider';
 import '../Styles/searchbar.css';
@@ -8,23 +8,21 @@ import { ThemeContext } from '../ThemeContextProvider';
 function SearchBar() {
   const { fetchJobs } = useContext(JobContext);
   const { page, setPage } = useContext(PageContext);
-  const { searchParams, setSearchParams } = useContext(SearchParamsContext);
-  const { description, location, full_time } = searchParams;
+  const { savedParams, setSavedParams } = useContext(SearchParamsContext);
+
+  const { description, location, full_time } = savedParams;
 
   function handleSubmit(e) {
     e.preventDefault();
+    fetchJobs(savedParams, 1);
     setPage(1);
-    fetchJobs(searchParams, page);
-  }
-
-  function handleFullTime() {
-    setSearchParams({ ...searchParams, full_time: !searchParams.full_time });
   }
 
   function handleParamsChange(e) {
     const param = e.target.name;
-    const value = e.target.value;
-    setSearchParams({ ...searchParams, [param]: value });
+    const value =
+      param === 'full_time' ? !savedParams.full_time : e.target.value;
+    setSavedParams({ ...savedParams, [param]: value });
   }
 
   const { isLightTheme } = useContext(ThemeContext);
@@ -62,7 +60,7 @@ function SearchBar() {
               <input
                 type='checkbox'
                 checked={full_time}
-                onChange={handleFullTime}
+                onChange={handleParamsChange}
                 name='full_time'
               />
               <label>Full Time</label>

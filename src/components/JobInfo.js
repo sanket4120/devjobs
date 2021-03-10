@@ -43,7 +43,6 @@ const JobInfo = ({ match }) => {
   } = info;
 
   const logo = company_logo ? company_logo : require('../assets/logo.png');
-  console.log(error);
 
   return (
     <>
