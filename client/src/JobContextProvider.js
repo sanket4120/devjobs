@@ -13,15 +13,10 @@ export const JobContext = createContext();
 export default function JobContextProvider(props) {
   const [state, dispatch] = useReducer(jobReducer, { jobs: [], loading: true });
 
-  const BASE_URL =
-    'https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json';
-
   const fetchJobs = (params, page) => {
-    console.log(`got request page:${page}`);
-    console.log('parameters:', params);
     dispatch({ type: MAKE_REQUEST });
     axios
-      .get(BASE_URL, {
+      .get('/jobs', {
         params: {
           markdown: true,
           page: page,
@@ -36,19 +31,19 @@ export default function JobContextProvider(props) {
       });
 
     axios
-      .get(BASE_URL, {
+      .get('/jobs', {
         params: {
           markdown: true,
           page: page + 1,
           ...params,
         },
       })
-      .then((res) =>
+      .then((res) => {
         dispatch({
           type: UPDATE_HAS_NEXT_PAGE,
           payload: { hasNextPage: res.data.length !== 0 },
-        })
-      )
+        });
+      })
       .catch((e) => {
         dispatch({ type: ERROR, payload: { error: e } });
       });

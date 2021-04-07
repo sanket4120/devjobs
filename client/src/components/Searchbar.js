@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { JobContext } from '../JobContextProvider';
 import { PageContext } from '../PageContextProvider';
 import '../Styles/searchbar.css';
@@ -7,7 +7,7 @@ import { ThemeContext } from '../ThemeContextProvider';
 
 function SearchBar() {
   const { fetchJobs } = useContext(JobContext);
-  const { page, setPage } = useContext(PageContext);
+  const { setPage } = useContext(PageContext);
   const { savedParams, setSavedParams } = useContext(SearchParamsContext);
 
   const { description, location, full_time } = savedParams;

@@ -2,29 +2,24 @@
   "name": "devjobs",
   "version": "1.0.0",
   "description": "",
-  "keywords": [],
-  "main": "src/index.js",
-  "dependencies": {
-    "axios": "0.20.0",
-    "react": "16.13.1",
-    "react-dom": "16.13.1",
-    "react-markdown": "^5.0.0",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.3"
-  },
-  "devDependencies": {
-    "typescript": "3.8.3"
-  },
+  "main": "index.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanket4120/devjobs.git"
+  },
+  "author": "sanket jadhav",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sanket4120/devjobs/issues"
+  },
+  "homepage": "https://github.com/sanket4120/devjobs#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  }
 }

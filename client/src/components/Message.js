@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Redirect } from 'react-router';
 import '../Styles/Message.css';
 import { ThemeContext } from '../ThemeContextProvider';
 

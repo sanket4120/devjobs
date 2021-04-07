@@ -13,7 +13,7 @@ const JobInfo = ({ match }) => {
   const [loading, setLoading] = useState(false);
 
   const id = match.params.id;
-  const BASE_URL = `https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions/${id}.json?markdown=true`;
+  const BASE_URL = `/${id}`;
 
   useEffect(() => {
     setLoading(true);
@@ -25,7 +25,7 @@ const JobInfo = ({ match }) => {
       })
       .catch((e) => {
         setLoading(false);
-        setError(e.message);
+        setError(e.response.data.message);
       });
     window.scrollTo(0, 0);
   }, []);
@@ -43,14 +43,12 @@ const JobInfo = ({ match }) => {
   } = info;
 
   const logo = company_logo ? company_logo : require('../assets/logo.png');
+  let createdAt = new Date(created_at).toLocaleDateString();
 
   return (
     <>
       {error !== null && !loading && (
-        <Message
-          message={`We can't find the job you are looking for.`}
-          image={require('../assets/search.svg')}
-        />
+        <Message message={error} image={require('../assets/search.svg')} />
       )}
       {loading && error === null && <Loader />}
       {error === null && Object.keys(info).length !== 0 && !loading && (
@@ -74,7 +72,7 @@ const JobInfo = ({ match }) => {
           <div className={isLightTheme ? 'desc' : 'desc content-bg-dark'}>
             <div className='jinfo'>
               <span>
-                {created_at} - {type}
+                {createdAt} - {type}
               </span>
               <p>{title}</p>
               <p id='location'>

@@ -14,13 +14,12 @@ function Jobs(desc) {
       {!loading && !error && <Pagination />}
       {error && (
         <Message
-          message='Sorry, something went wrong.'
+          message={error.response.data.message}
           image={require('../assets/server_error.svg')}
         />
       )}
-
+      {loading && <Loader />}
       <div className='jobs'>
-        {loading && <Loader />}
         {!loading &&
           !error &&
           jobs &&
@@ -43,7 +42,7 @@ function Jobs(desc) {
       </div>
       {!loading && !error && jobs && jobs.length === 0 && (
         <Message
-          message='Nothing found'
+          message='OOPS! nothing found'
           image={require('../assets/search.svg')}
         />
       )}
